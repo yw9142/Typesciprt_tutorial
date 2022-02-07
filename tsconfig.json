@@ -100,11 +100,7 @@
   },
   "exclude": [
     "node_modules",
-    "src/basics.ts",
-    "src/functions.ts",
-    "src/objs-arrays-enums.ts",
-    "src/union-aliases.ts",
-    "src/analytics.ts"
+    "src/type/*.ts"
   ],
   "include": [
     "src/app.ts"
