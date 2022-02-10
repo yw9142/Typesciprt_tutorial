@@ -9,7 +9,7 @@ abstract class Department {
         // this.name = n;
     }
 
-    static createEmployee(name:string) {
+    static createEmployee(name: string) {
         return {name: name};
     }
 

@@ -101,7 +101,8 @@
   "exclude": [
     "node_modules",
     "src/type/*.ts",
-    "src/class/*.ts"
+    "src/class/*.ts",
+    "src/advancedType/*.ts"
   ],
   "include": [
     "src/app.ts"

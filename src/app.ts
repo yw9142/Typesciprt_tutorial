@@ -1,77 +1,83 @@
-type Admin = {
-    name: string;
-    privileges: string[];
-};
+// const names: Array<string | number> = ['Max', 'Manuel'];
+//
+// const promise = new Promise((resolve, reject) => {
+//     setTimeout(() => {
+//         resolve(`This is done!`);
+//     }, 2000);
+//     reject();
+// });
 
-type Employee = {
-    name: string;
-    startDate: Date;
-};
-
-// interface ElevatedEmployee extends Admin, Employee {}
-
-type ElevatedEmployee = Admin & Employee;
-
-const e1: ElevatedEmployee = {
-    name: 'Max',
-    privileges: ['create-server'],
-    startDate: new Date()
-};
-
-type Combinable = string | number;
-type Numeric = number | boolean;
-
-type Universal = Combinable & Numeric;
-
-function add(a: Combinable, b: Combinable) {
-    if (typeof a === 'string' || typeof b === 'string') {
-        return a.toString() + b.toString();
-    }
-    return a + b;
+function merge<T extends object, U extends object>(objA: T, objB: U) {
+  return Object.assign(objA, objB);
 }
 
-type UnknownEmployee = Employee | Admin;
+const mergedObj = merge({ name: 'Max' }, { age: 30 });
+console.log(mergedObj);
 
-function printEmployeeInformation(emp: UnknownEmployee) {
-    console.log(`Name: ${emp.name}`);
-    if ('privileges' in emp) {
-        console.log(`Privileges: ${emp.privileges}`);
-    }
-
-    if ('startDate' in emp) {
-        console.log(`StartDate: ${emp.startDate}`);
-    }
+interface Lengthy {
+  length: number;
 }
 
-printEmployeeInformation(e1);
-
-class Car {
-    drive() {
-        console.log(`Driving...`);
-    }
+function countAndDescribe<T extends Lengthy>(element: T): [T, string] {
+  let descriptionText = 'Got no value.';
+  if (element.length === 1) {
+    descriptionText = `Got 1 elements.`;
+  } else if (element.length > 1) {
+    descriptionText = `Got ${element.length} elements.`;
+  }
+  return [element, descriptionText];
 }
 
-class Truck {
-    drive() {
-        console.log(`Driving a Truck...`);
-    }
+console.log(countAndDescribe(`Hi there!`));
 
-    loadCargo(amount: number) {
-        console.log(`Loading Cargo... ${amount}`);
-    }
+function extraAndConvert<T extends object, U extends keyof T>(
+  obj: T,
+  key: U,
+) {
+  return `Value: ${obj[key]}`;
 }
 
-type Vehicle = Car | Truck;
+extraAndConvert({ name: 'Yonghun' }, 'name');
 
-const v1 = new Car();
-const v2 = new Truck();
+class DataStorage<T extends string | number | boolean> {
+  private data: T[] = [];
 
-function useVehicle(vehicle: Vehicle) {
-    vehicle.drive();
-    if (vehicle instanceof Truck) {
-        vehicle.loadCargo(1000);
+  addItem(item: T) {
+    this.data.push(item);
+  }
+
+  removeItem(item: T) {
+    if (this.data.indexOf(item) === -1) {
+      return;
     }
+    this.data.splice(this.data.indexOf(item), 1);
+  }
+
+  getItem() {
+    return [...this.data];
+  }
 }
 
-useVehicle(v1);
-useVehicle(v2);
+const textStorage = new DataStorage<string>();
+textStorage.addItem('Park');
+textStorage.addItem('Yonghun');
+textStorage.removeItem('Yonghun');
+console.log(textStorage.getItem());
+
+const numberStorage = new DataStorage<number>();
+
+// const objStorage = new DataStorage<object>();
+// objStorage.addItem({name: 'Park'});
+// objStorage.addItem({name: 'Yonghun'});
+// objStorage.removeItem({name: 'Park'});
+// console.log(objStorage.getItem());
+
+interface CourseGoal {
+  title: string;
+  description: string;
+  completeUntil: Date;
+}
+
+function createCourseGoal(title: string, description: string, date: Date): CourseGoal {
+  return { title: title, description: description, completeUntil: date };
+}
