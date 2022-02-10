@@ -1,43 +1,43 @@
 // type AddFn = (a: number, b: number) => number;
 interface AddFn {
-    (a: number, b: number): number;
+  (a: number, b: number): number;
 }
 
 // let add: AddFn;
 
 let add: AddFn = (n1: number, n2: number) => {
-    return n1 + n2;
+  return n1 + n2;
 };
 
 console.log(add(1, 2));
 
 interface Person {
-    readonly name?: string;
-    outputName?: string;
-    age: number;
+  readonly name?: string;
+  outputName?: string;
+  age: number;
 }
 
 interface Greetable extends Person {
-    greet(phrase: string): void;
+  greet(phrase: string): void;
 }
 
 class PersonClass implements Greetable {
-    name?: string;
-    age = 30;
+  name?: string;
+  age = 30;
 
-    constructor(n?: string) {
-        if (n) {
-            this.name = n;
-        }
+  constructor(n?: string) {
+    if (n) {
+      this.name = n;
     }
+  }
 
-    greet(phrase: string) {
-        if (this.name) {
-            console.log(`${phrase} ${this.name}`);
-        } else {
-            console.log('Hi!');
-        }
+  greet(phrase: string) {
+    if (this.name) {
+      console.log(`${phrase} ${this.name}`);
+    } else {
+      console.log('Hi!');
     }
+  }
 }
 
 let user1: Greetable;

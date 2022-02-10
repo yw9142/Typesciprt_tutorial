@@ -1,11 +1,11 @@
 type Admin = {
-    name: string;
-    privileges: string[];
+  name: string;
+  privileges: string[];
 };
 
 type Employee = {
-    name: string;
-    startDate: Date;
+  name: string;
+  startDate: Date;
 };
 
 // interface ElevatedEmployee extends Admin, Employee {}
@@ -13,9 +13,9 @@ type Employee = {
 type ElevatedEmployee = Admin & Employee;
 
 const e1: ElevatedEmployee = {
-    name: 'Max',
-    privileges: ['create-server'],
-    startDate: new Date()
+  name: 'Max',
+  privileges: ['create-server'],
+  startDate: new Date(),
 };
 
 type Combinable = string | number;
@@ -26,19 +26,19 @@ type Universal = Combinable & Numeric;
 function add(a: number, b: number): number;
 function add(a: string, b: string): string;
 function add(a: Combinable, b: Combinable) {
-    if (typeof a === 'string' || typeof b === 'string') {
-        return a.toString() + b.toString();
-    }
-    return a + b;
+  if (typeof a === 'string' || typeof b === 'string') {
+    return a.toString() + b.toString();
+  }
+  return a + b;
 }
 
 const result = add('Park', 'Yonghun');
 result.split('');
 
 const fetchedUserData = {
-    id: 'u1',
-    name: 'Yonghun',
-    job: {title: 'CEO', description: 'My own company'}
+  id: 'u1',
+  name: 'Yonghun',
+  job: { title: 'CEO', description: 'My own company' },
 };
 
 console.log(fetchedUserData?.job.title);
